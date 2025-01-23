@@ -1,10 +1,8 @@
-/* สไตล์พื้นฐาน */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-image: url(img/pic1.jpg);
     background-size: 500px;
-    /* background-color: #f0f8ff; */
     margin: 0;
     padding: 0;
 }
@@ -24,8 +22,8 @@ h1 {
 
 .card {
     width: 100px;
-    height: 100px;
-    perspective: 1000px; /* เพิ่มมิติ */
+    height: 110px; /* เพิ่มความสูงเพื่อรองรับชื่อผลไม้ */
+    perspective: 1000px;
 }
 
 .card-inner {
@@ -49,11 +47,10 @@ h1 {
     top: 0;
     left: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    font-size: 32px;
-    font-weight: bold;
 }
 
 .card-front {
@@ -67,42 +64,53 @@ h1 {
     transform: rotateY(180deg);
 }
 
-/* --- เพิ่ม Media Queries สำหรับ Responsive Design --- */
+.emoji {
+    font-size: 48px;
+    margin-bottom: 5px;
+}
 
+.fruit-name {
+    font-size: 14px;
+    font-weight: bold;
+}
 
-
-/* สำหรับจอแนวนอนขนาดเล็ก เช่น แท็บเล็ต */
+/* Media Queries เหมือนเดิม */
 @media (max-width: 900px) {
     #game-board {
-        grid-template-columns: repeat(4, 90px); /* ปรับจำนวนการ์ดใน 1 แถว */
+        grid-template-columns: repeat(4, 90px);
         grid-gap: 10px;
     }
 
     .card {
         width: 90px;
-        height: 90px;
+        height: 100px;
     }
 
-    .card-front,
-    .card-back {
-        font-size: 28px;
+    .emoji {
+        font-size: 42px;
+    }
+
+    .fruit-name {
+        font-size: 12px;
     }
 }
 
-/* สำหรับจอเล็ก (มือถือแนวตั้ง) */
 @media (max-width: 600px) {
     #game-board {
-        grid-template-columns: repeat(3, 80px); /* ลดจำนวนการ์ดใน 1 แถว */
-        grid-gap: 8px; /* ลดระยะห่างระหว่างการ์ด */
+        grid-template-columns: repeat(3, 80px);
+        grid-gap: 8px;
     }
 
     .card {
         width: 80px;
-        height: 80px; /* ลดขนาดการ์ด */
+        height: 90px;
     }
 
-    .card-front,
-    .card-back {
-        font-size: 24px; /* ลดขนาดตัวอักษรในการ์ด */
+    .emoji {
+        font-size: 36px;
+    }
+
+    .fruit-name {
+        font-size: 11px;
     }
 }

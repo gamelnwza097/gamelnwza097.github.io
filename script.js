@@ -1,14 +1,25 @@
 const gameBoard = document.getElementById('game-board');
 const scoreDisplay = document.getElementById('score');
 
-// รายการอิโมจิผลไม้
-const allImages = ['🍎', '🍌', '🍇', '🍓', '🍒', '🍍', '🥭', '🥝', '🍉', '🍑'];
+// รายการอิโมจิผลไม้พร้อมชื่อ
+const allImages = [
+    {emoji: '🍎', name: 'แอปเปิล'},
+    {emoji: '🍌', name: 'กล้วย'},
+    {emoji: '🍇', name: 'องุ่น'},
+    {emoji: '🍓', name: 'สตรอเบอร์รี่'},
+    {emoji: '🍒', name: 'เชอร์รี่'},
+    {emoji: '🍍', name: 'สับปะรด'},
+    {emoji: '🥭', name: 'มะม่วง'},
+    {emoji: '🥝', name: 'กีวี'},
+    {emoji: '🍉', name: 'แตงโม'},
+    {emoji: '🍑', name: 'ลูกพีช'}
+];
 
 let flippedCards = [];
 let matchedCards = 0;
 let score = 0;
 let selectedImages = [];
-let isGameActive = false; // ตัวแปรบ่งชี้ว่าเกมเริ่มแล้ว
+let isGameActive = false;
 
 function shuffle(array) {
     return array.sort(() => 0.5 - Math.random());
@@ -20,7 +31,7 @@ function getRandomImages(numPairs) {
     return [...selected, ...selected];
 }
 
-function createCard(image) {
+function createCard(imageObj) {
     const card = document.createElement('div');
     card.classList.add('card');
     
@@ -32,15 +43,24 @@ function createCard(image) {
     
     const cardBack = document.createElement('div');
     cardBack.classList.add('card-back');
-    cardBack.textContent = image;
+    
+    const emoji = document.createElement('div');
+    emoji.textContent = imageObj.emoji;
+    emoji.classList.add('emoji');
+    
+    const fruitName = document.createElement('div');
+    fruitName.textContent = imageObj.name;
+    fruitName.classList.add('fruit-name');
+    
+    cardBack.appendChild(emoji);
+    cardBack.appendChild(fruitName);
     
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
     
-    card.dataset.image = image;
+    card.dataset.image = imageObj.emoji;
     
-    // เช็คว่าเกมเริ่มแล้วหรือยัง
     card.addEventListener('click', () => {
         if (!isGameActive || card.classList.contains('flipped') || flippedCards.length >= 2) return;
         flipCard(card);
@@ -49,6 +69,7 @@ function createCard(image) {
     return card;
 }
 
+// ส่วนที่เหลือของโค้ดยังคงเดิม
 function flipCard(card) {
     card.classList.add('flipped');
     flippedCards.push(card);
@@ -64,14 +85,14 @@ function checkMatch() {
 
     if (isMatch) {
         matchedCards += 2;
-        score += 10; // เพิ่มคะแนนเมื่อจับคู่ถูกต้อง
+        score += 10;
         flippedCards = [];
 
         if (matchedCards === selectedImages.length) {
             setTimeout(() => alert(`คุณชนะแล้ว! คะแนนรวม: ${score}`), 500);
         }
     } else {
-        score -= 5; // ลดคะแนนเมื่อจับคู่ผิด
+        score -= 5;
         setTimeout(() => {
             card1.classList.remove('flipped');
             card2.classList.remove('flipped');
@@ -87,30 +108,26 @@ function updateScore() {
 }
 
 function initGame() {
-    const numPairs = 6; // จำนวนคู่ของการ์ดที่ต้องการ
+    const numPairs = 6;
     selectedImages = getRandomImages(numPairs);
     const shuffledImages = shuffle(selectedImages);
 
-    // สร้างการ์ด
-    shuffledImages.forEach(image => {
-        const card = createCard(image);
+    shuffledImages.forEach(imageObj => {
+        const card = createCard(imageObj);
         gameBoard.appendChild(card);
     });
 
     updateScore();
 
-    // ทำให้ผลไม้ทั้งหมดปรากฏในช่วงเริ่มต้น
     setTimeout(() => {
-        // เมื่อครบเวลาแล้ว ให้หมุนการ์ดทั้งหมดกลับ
         const allCards = document.querySelectorAll('.card');
         allCards.forEach(card => card.classList.add('flipped'));
 
-        // หลังจากแสดงการ์ดทั้งหมดแล้ว ค่อยหมุนการ์ดกลับ
         setTimeout(() => {
             allCards.forEach(card => card.classList.remove('flipped'));
-            isGameActive = true; // เปิดให้คลิกการ์ดหลังจากปิดการ์ดหมดแล้ว
-        }, 1000); // ปิดการ์ดหลังจากแสดงผล 1 วินาที
-    }, 2000); // แสดงผลไม้ทั้งหมด 2 วินาทีหลังจากเริ่มเกม
+            isGameActive = true;
+        }, 1800);
+    }, 1500);
 }
 
 initGame();
