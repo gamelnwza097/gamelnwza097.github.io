@@ -79,6 +79,19 @@ function flipCard(card) {
     }
 }
 
+function resetGame() {
+    // ล้างบอร์ดเกมและรีเซ็ตตัวแปร
+    gameBoard.innerHTML = '';
+    flippedCards = [];
+    matchedCards = 0;
+    score = 0;
+    isGameActive = false;
+
+    // เริ่มเกมใหม่
+    initGame();
+}
+
+
 function checkMatch() {
     const [card1, card2] = flippedCards;
     const isMatch = card1.dataset.image === card2.dataset.image;
@@ -89,7 +102,20 @@ function checkMatch() {
         flippedCards = [];
 
         if (matchedCards === selectedImages.length) {
-            setTimeout(() => alert(`คุณชนะแล้ว! คะแนนรวม: ${score}`), 500);
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'คุณชนะแล้ว!',
+                    text: `คะแนนรวมของคุณคือ ${score}`,
+                    icon: 'success',
+                    confirmButtonText: 'เล่นอีกครั้ง',
+                    showCancelButton: true,
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        resetGame(); // เรียกฟังก์ชันเพื่อเริ่มเกมใหม่
+                    }
+                });
+            }, 500);
         }
     } else {
         score -= 5;
