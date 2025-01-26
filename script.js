@@ -1,18 +1,24 @@
 const gameBoard = document.getElementById('game-board');
 const scoreDisplay = document.getElementById('score');
 
+window.onload = function() {
+    Swal.fire({
+        title: 'แจ้งเตือน!',
+        text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+        footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
+    });
+};
+
 // รายการอิโมจิผลไม้พร้อมชื่อ
 const allImages = [
-    {emoji: '🍎', name: 'แอปเปิล'},
-    {emoji: '🍌', name: 'กล้วย'},
-    {emoji: '🍇', name: 'องุ่น'},
-    {emoji: '🍓', name: 'สตรอเบอร์รี่'},
-    {emoji: '🍒', name: 'เชอร์รี่'},
-    {emoji: '🍍', name: 'สับปะรด'},
-    {emoji: '🥭', name: 'มะม่วง'},
-    {emoji: '🥝', name: 'กีวี'},
-    {emoji: '🍉', name: 'แตงโม'},
-    {emoji: '🍑', name: 'ลูกพีช'}
+    {imageUrl: '/img/Motherboard.png', name: 'เมนบอร์ด'},
+    {imageUrl: '/img/RTX.png', name: 'การ์ดจอ'},
+    {imageUrl: '/img/cpu.png', name: 'ซีพียู'},
+    {imageUrl: '/img/mouse.png', name: 'เมาส์'},
+    {imageUrl: '/img/ram.png', name: 'แรม'},
+    {imageUrl: '/img/screen.png', name: 'หน้าจอ'}
 ];
 
 let flippedCards = [];
@@ -44,22 +50,26 @@ function createCard(imageObj) {
     const cardBack = document.createElement('div');
     cardBack.classList.add('card-back');
     
-    const emoji = document.createElement('div');
-    emoji.textContent = imageObj.emoji;
-    emoji.classList.add('emoji');
+    // เพิ่มรูปภาพ
+    const img = document.createElement('img');
+    img.src = imageObj.imageUrl;
+    img.alt = imageObj.name;
+    img.classList.add('assets-img');
     
+    // เพิ่มชื่อผลไม้
     const fruitName = document.createElement('div');
     fruitName.textContent = imageObj.name;
-    fruitName.classList.add('fruit-name');
+    fruitName.classList.add('assets-name');
     
-    cardBack.appendChild(emoji);
+    // ใส่รูปภาพและชื่อผลไม้ใน cardBack
+    cardBack.appendChild(img);
     cardBack.appendChild(fruitName);
     
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
     
-    card.dataset.image = imageObj.emoji;
+    card.dataset.image = imageObj.imageUrl; // ใช้ URL รูปภาพเป็นตัวอ้างอิง
     
     card.addEventListener('click', () => {
         if (!isGameActive || card.classList.contains('flipped') || flippedCards.length >= 2) return;
