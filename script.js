@@ -13,12 +13,12 @@ window.onload = function() {
 
 // รายการอิโมจิผลไม้พร้อมชื่อ
 const allImages = [
-    {imageUrl: '/img/Motherboard.png', name: 'เมนบอร์ด'},
-    {imageUrl: '/img/RTX.png', name: 'การ์ดจอ'},
-    {imageUrl: '/img/cpu.png', name: 'ซีพียู'},
-    {imageUrl: '/img/mouse.png', name: 'เมาส์'},
-    {imageUrl: '/img/ram.png', name: 'แรม'},
-    {imageUrl: '/img/screen.png', name: 'หน้าจอ'}
+    {imageUrl: '/img/Motherboard.png', name: 'mother board'},
+    {imageUrl: '/img/RTX.png', name: 'gpu'},
+    {imageUrl: '/img/cpu.png', name: 'cpu'},
+    {imageUrl: '/img/mouse.png', name: 'mouse'},
+    {imageUrl: '/img/ram.png', name: 'ram'},
+    {imageUrl: '/img/screen.png', name: 'monitor'}
 ];
 
 let flippedCards = [];
