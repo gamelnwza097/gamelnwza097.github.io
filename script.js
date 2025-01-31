@@ -98,6 +98,13 @@ function resetGame() {
     isGameActive = false;
 
     // เริ่มเกมใหม่
+    Swal.fire({
+        title: 'แจ้งเตือน!',
+        text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+        footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
+    });
     initGame();
 }
 
