@@ -1,16 +1,6 @@
 const gameBoard = document.getElementById('game-board');
 const scoreDisplay = document.getElementById('score');
 
-window.onload = function() {
-    Swal.fire({
-        title: 'แจ้งเตือน!',
-        text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
-        icon: 'warning',
-        confirmButtonText: 'ตกลง',
-        footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
-    });
-};
-
 // รายการอิโมจิผลไม้พร้อมชื่อ
 const allImages = [
     {imageUrl: '/img/Motherboard.png', name: 'mother board'},
@@ -98,13 +88,6 @@ function resetGame() {
     isGameActive = false;
 
     // เริ่มเกมใหม่
-    Swal.fire({
-        title: 'แจ้งเตือน!',
-        text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
-        icon: 'warning',
-        confirmButtonText: 'ตกลง',
-        footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
-    });
     initGame();
 }
 
@@ -170,6 +153,15 @@ function initGame() {
             allCards.forEach(card => card.classList.remove('flipped'));
             isGameActive = true;
         }, 1800);
+        setTimeout(() => {
+            Swal.fire({
+                title: 'แจ้งเตือน!',
+                text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
+                icon: 'warning',
+                confirmButtonText: 'ตกลง',
+                footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
+            });
+        }, 2400)
     }, 1500);
 }
 
