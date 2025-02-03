@@ -153,15 +153,6 @@ function initGame() {
             allCards.forEach(card => card.classList.remove('flipped'));
             isGameActive = true;
         }, 1800);
-        setTimeout(() => {
-            Swal.fire({
-                title: 'แจ้งเตือน!',
-                text: 'ยังไม่ชำระเงินสำหรับเว็บไซต์นี้ โปรดชำระเงินหรือติดต่อ ig: p.spn_',
-                icon: 'warning',
-                confirmButtonText: 'ตกลง',
-                footer: '<a href="https://www.instagram.com/p.spn_" target="_blank">นำทางไป Instagram</a>'
-            });
-        }, 2400)
     }, 1500);
 }
 
